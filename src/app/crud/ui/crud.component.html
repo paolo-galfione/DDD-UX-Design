@@ -1,1 +1,110 @@
-<h1>CRUD</h1>
+    <!-- contenuto della pagina -->
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card mt-5">
+                    <div class="card-header">
+                        Scheda Ospite
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <div><small class="text-muted">Nome:</small></div>
+                                <div class="fw-bold">{{ ospite.nome }}</div>
+                            </div>
+                            <div class="col">
+                                <div><small class="text-muted">Cognome:</small></div>
+                                <div class="fw-bold">{{ ospite.cognome }}</div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div><small class="text-muted">Presente:</small></div>
+                            <div class="fw-bold">{{ ospite.presente ? "Sì" : "No" }}</div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col">
+                                <div><small class="text-muted">Scala DDD:</small></div>
+                                <div class="fw-bold">{{ ospite.scalaDDD }}</div>
+                            </div>
+                            <div class="col">
+                                <div><small class="text-muted">Progetto (PAI):</small></div>
+                                <div class="fw-bold">{{ ospite.progetto }}</div>
+                            </div>
+                        </div>
+                        <div class="container mt-5">
+                            <table class="table">
+                                <thead>
+                                  <tr>
+                                    <th scope="col">Data</th>
+                                    <th scope="col">Nucleo</th>
+                                  </tr>
+                                </thead>
+                                <tbody *ngFor="let nucleo of ospite.nuclei">
+                                  <tr>
+                                    <td>{{ nucleo.dataTrasferimento | date: 'dd/MM/yyyy'}}</td>
+                                    <td>{{ nucleo.nucleo }}</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                        </div>
+                        <div class="row">
+                            <div class="col text-end">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modificaModal">Modifica</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="modal fade" id="modificaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Modifica Ospite</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="form">
+                    <div class="mb-3">
+                      <label for="nome" class="form-label">Nome:</label>
+                      <input type="text" class="form-control" id="nome" formControlName="nome">
+                    </div>
+                    <div class="mb-3">
+                        <label for="cognome" class="form-label">Cognome:</label>
+                        <input type="text" class="form-control" id="cognome" formControlName="cognome">
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" value="" id="presente" formControlName="presente">
+                        <label class="form-check-label" for="presente">
+                          Presente
+                        </label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="scalaDDD" class="form-label">Scala DDD:</label>
+                        <input type="number" min="0" max="30" class="form-control" id="scalaDDD" formControlName="scalaDDD">
+                        <div id="scalaDDD" class="form-text">0-10 Rischio Depressione | 11-20 Rischio Demenza | 21-30 Problemi Deambulazione</div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="progetto" class="form-label">Progetto Assistenziale Individualizzato (PAI):</label>
+                        <select class="form-select" id="progetto" formControlName="progetto">
+                            <option *ngFor="let nomeProgetto of manager.leggiProgetti()">{{ nomeProgetto }}</option>
+                          </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="nucleo" class="form-label">Tresferisci a Nucleo:</label>
+                        <select class="form-select" id="nucleo" formControlName="nucleo">
+                            <option *ngFor="let nomeNucleo of manager.leggiNuclei()">{{ nomeNucleo }}</option>
+                          </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancella</button>
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="salva()">Salva</button>
+            </div>
+          </div>
+        </div>
+      </div>
