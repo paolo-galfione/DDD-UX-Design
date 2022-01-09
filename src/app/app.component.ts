@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styles: []
 })
 export class AppComponent {
-  title = 'DDD-UX-Design';
+  mainMenu = [
+    { title: 'Home', routerLink: '/'},
+    { title: 'CRUD', routerLink: '/crud'},
+    { title: 'Domain', routerLink: '/domain'},
+    { title: 'State', routerLink: '/state'},
+    { title: 'Auth', routerLink: '/auth'},
+    { title: 'Extra', routerLink: '/extras'}
+];
 }

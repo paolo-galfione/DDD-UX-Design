@@ -3,33 +3,39 @@
   <div class="row justify-content-center">
     <div class="col-lg-8">
       <div class="card mt-5">
-        <div class="card-header">
-          Scheda Ospite
+        <div class="card-header" [ngClass]="{ 'bg-success': ospite.presente, 'text-white': ospite.presente, 'bg-warning': !ospite.presente }">
+          <div class="row">
+            <div class="col">
+              Scheda di 
+              <span class="fw-bold">{{ospite.nome}} {{ospite.cognome}}</span>
+            </div>
+            <div class="col text-end">
+              <span style="font-size: 0.8rem;" class="fw-bold text-uppercase">
+                {{ospite.presente ? 'presente' : 'assente' }}
+              </span>
+            </div>
+          </div>
         </div>
-        <div class="card-body">
+        <div class="card-body bg-white">
           <div class="row">
             <div class="col-lg-8">
               <div class="row">
                 <div class="col">
-                  <div><small class="text-muted">Nome:</small></div>
+                  <div><small class="text-muted label">Nome</small></div>
                   <div class="fw-bold">{{ ospite.nome }}</div>
                 </div>
                 <div class="col">
-                  <div><small class="text-muted">Cognome:</small></div>
+                  <div><small class="text-muted label">Cognome</small></div>
                   <div class="fw-bold">{{ ospite.cognome }}</div>
                 </div>
               </div>
               <div class="row mt-3">
-                <div><small class="text-muted">Presente:</small></div>
-                <div class="fw-bold">{{ ospite.presente ? "Sì" : "No" }}</div>
-              </div>
-              <div class="row mt-3">
                 <div class="col">
-                  <div><small class="text-muted">Scala DDD:</small></div>
+                  <div><small class="text-muted label">Scala DDD</small></div>
                   <div class="fw-bold">{{ ospite.scalaDDD }}</div>
                 </div>
                 <div class="col">
-                  <div><small class="text-muted">Progetto (PAI):</small></div>
+                  <div><small class="text-muted label">Progetto (PAI):</small></div>
                   <div class="fw-bold">{{ ospite.progetto }}</div>
                 </div>
               </div>
@@ -55,9 +61,9 @@
 
                 <div class="btn-group-vertical gap-2">
                   <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                    data-bs-target="#impostaAnagrafica">Anagrafica</button>
+                    data-bs-target="#impostaAnagrafica">Imposta Anagrafica</button>
                   <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                    data-bs-target="#impostaSchedaSanitaria">Scheda Sanitaria</button>
+                    data-bs-target="#impostaSchedaSanitaria">Imposta Scheda Sanitaria</button>
                   <button type="button" class="btn btn-primary" (click)="impostaPresente()">Imposta Presente</button>
                   <button type="button" class="btn btn-primary" (click)="impostaAssente()">Imposta Assente</button>
                   <button type="button" class="btn btn-primary" data-bs-toggle="modal"
@@ -119,7 +125,7 @@
           <div class="mb-3">
             <label for="progetto" class="form-label">Progetto Assistenziale Individualizzato (PAI):</label>
             <select class="form-select" id="progetto" formControlName="progetto">
-              <option *ngFor="let nomeProgetto of manager.leggiProgetti()">{{ nomeProgetto }}</option>
+              <option *ngFor="let nomeProgetto of progetti" [value]="nomeProgetto">{{ nomeProgetto }}</option>
             </select>
           </div>
         </form>
@@ -143,7 +149,7 @@
       <div class="modal-body">
           <label for="nucleo" class="form-label">Nuovo nucleo:</label>
           <select class="form-select" id="nucleo" #nomeNucleo>
-            <option *ngFor="let nomeNucleo of manager.leggiNuclei()">{{ nomeNucleo }}</option>
+            <option *ngFor="let nomeNucleo of nuclei">{{ nomeNucleo }}</option>
           </select>
       </div>
       <div class="modal-footer">

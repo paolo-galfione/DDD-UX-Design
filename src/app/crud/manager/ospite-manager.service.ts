@@ -48,13 +48,4 @@ export class OspiteManagerService {
   nucleoCorrente() : string {
     return this.ospite.nuclei.slice(-1)[0].nucleo;
   }
-
-  leggiProgetti(): string[] {
-    return Progetti;
-  }
-
-  leggiNuclei(): string[] {
-    return Nuclei;
-  }
-
 }

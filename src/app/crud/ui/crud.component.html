@@ -90,13 +90,17 @@
                     <div class="mb-3">
                         <label for="progetto" class="form-label">Progetto Assistenziale Individualizzato (PAI):</label>
                         <select class="form-select" id="progetto" formControlName="progetto">
-                            <option *ngFor="let nomeProgetto of manager.leggiProgetti()">{{ nomeProgetto }}</option>
+                            <option *ngFor="let nomeProgetto of progetti" [value]="nomeProgetto">
+                              {{ nomeProgetto }}
+                            </option>
                           </select>
                     </div>
                     <div class="mb-3">
                         <label for="nucleo" class="form-label">Tresferisci a Nucleo:</label>
                         <select class="form-select" id="nucleo" formControlName="nucleo">
-                            <option *ngFor="let nomeNucleo of manager.leggiNuclei()">{{ nomeNucleo }}</option>
+                            <option *ngFor="let nomeNucleo of nuclei" [value]="nomeNucleo">
+                              {{ nomeNucleo }}
+                            </option>
                           </select>
                     </div>
                 </form>

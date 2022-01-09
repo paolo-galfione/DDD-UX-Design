@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Nuclei } from '../../shared/nuclei';
 import { Progetti } from '../../shared/progetti';
 import { Ospite } from '../domain/ospite';
-import { AnagraficaDto } from './anagrafica-dto';
-import { SchedaSanitariaDto } from './scheda-sanitaria-dto';
-import { TrasferimentoNucleoDto } from './trasferimento-nucleo-dto';
+import { AnagraficaDto } from './dtos/anagrafica-dto';
+import { SchedaSanitariaDto } from './dtos/scheda-sanitaria-dto';
+import { TrasferimentoNucleoDto } from './dtos/trasferimento-nucleo-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -50,14 +50,6 @@ export class OspiteDomainService {
 
   nucleoCorrente(): string {
     return this.ospite.nucleoCorrente;
-  }
-
-  leggiProgetti(): string[] {
-    return Progetti;
-  }
-
-  leggiNuclei(): string[] {
-    return Nuclei;
   }
 
 }

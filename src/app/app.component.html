@@ -9,23 +9,8 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
             <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" routerLinkActive="active" routerLink="/">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLinkActive="active" routerLink="/crud">CRUD</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLinkActive="active" routerLink="/domain">Domain</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">State</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Authorization</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Helper</a>
+                <li *ngFor="let item of mainMenu" class="nav-item">
+                    <a class="nav-link" routerLinkActive="active" [routerLink]="item.routerLink">{{item.title}}</a>
                 </li>
             </ul>
         </div>
@@ -38,18 +23,18 @@
     <router-outlet></router-outlet>
 </div>
 
-    <!-- footer fisso -->
+<!-- footer fisso -->
 
-    <nav class="navbar fixed-bottom navbar-light bg-light" >
-        <div class="w-100 d-flex justify-content-between">
-            <div class="p-2 bd-highlight">
-                <a href="https://www.linkedin.com/in/paologalfione/" class=""><i class="bi-linkedin"></i></a>
-                <span class="text-muted p">Paolo Galfione</span>
-                <a href="https://www.zucchetti.it/" class="ms-10">Zucchetti Spa</a>
-            </div>
-            <div class="p-2 bd-highlight">
-                <a href="https://github.com/paolo-galfione/DDD-UX-Design" class=""><i class="bi-github"></i></a>
-                <span class="text-muted p">GitHub (2022)</span>
-            </div>
+<nav class="navbar fixed-bottom navbar-light bg-light">
+    <div class="w-100 d-flex justify-content-between">
+        <div class="p-2 bd-highlight">
+            <a href="https://www.linkedin.com/in/paologalfione/" class=""><i class="bi-linkedin"></i></a>
+            <span class="text-muted p">Paolo Galfione</span>
+            <a href="https://www.zucchetti.it/" class="ms-10">Zucchetti Spa</a>
         </div>
+        <div class="p-2 bd-highlight">
+            <a href="https://github.com/paolo-galfione/DDD-UX-Design" class=""><i class="bi-github"></i></a>
+            <span class="text-muted p">GitHub (2022)</span>
+        </div>
+    </div>
 </nav>
