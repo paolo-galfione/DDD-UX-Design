@@ -1,19 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Ospite } from '../entity/ospite';
 import { OspiteDto } from './ospite-dto';
-
-export const Progetti: string[] = [
-  'Sospeso',
-  'Attività di socializzazione',
-  'Recupero cognitivo',
-  'Fisioterapia',
-];
-
-export const Nuclei: string[] = [
-  'Nucleo Verde',
-  'Nucleo Rosso',
-  'Nucleo Blu'
-];
+import { Nuclei } from '../../shared/nuclei';
+import { Progetti } from '../../shared/progetti';
 
 @Injectable({
   providedIn: 'root'
