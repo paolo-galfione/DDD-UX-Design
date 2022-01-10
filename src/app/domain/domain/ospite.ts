@@ -65,8 +65,6 @@ constructor(public id: number,
     }
 
     trasferisciNucleo(dataTrasferimento: Date, nucleo: string) {
-        const n = Nuclei.find(n => n === nucleo);
-        console.log('nucleo:', this.nuclei, n, nucleo)
         errorIf(() => !this.presente,
             `Non è possibile cambiare nucleo quando l'ospite è assente` );
         errorIf(() => !Nuclei.find(n => n === nucleo),

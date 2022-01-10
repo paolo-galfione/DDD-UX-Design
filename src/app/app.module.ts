@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { CRUDComponent } from './crud/ui/crud.component';
 import { DomainComponent } from './domain/ui/domain.component';
+import { StateComponent } from './state/ui/state.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     CRUDComponent,
-    DomainComponent
+    DomainComponent,
+    StateComponent
   ],
   imports: [
     BrowserModule,

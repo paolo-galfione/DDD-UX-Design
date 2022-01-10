@@ -1,0 +1,170 @@
+<!-- contenuto della pagina -->
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <div class="card mt-5">
+        <div class="card-header"
+          [ngClass]="{ 'bg-success': ospite.presente, 'text-white': ospite.presente, 'bg-warning': !ospite.presente }">
+          <div class="row">
+            <div class="col">
+              Scheda di
+              <span class="fw-bold">{{ospite.nome}} {{ospite.cognome}}</span>
+            </div>
+            <div class="col text-end">
+              <span style="font-size: 0.8rem;" class="fw-bold text-uppercase">
+                {{ospite.presente ? 'presente' : 'assente' }}
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="card-body bg-white">
+          <div class="row">
+            <div class="col-lg-8">
+              <div class="row">
+                <div class="col">
+                  <div><small class="text-muted label">Nome</small></div>
+                  <div class="fw-bold">{{ ospite.nome }}</div>
+                </div>
+                <div class="col">
+                  <div><small class="text-muted label">Cognome</small></div>
+                  <div class="fw-bold">{{ ospite.cognome }}</div>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col">
+                  <div><small class="text-muted label">Scala DDD</small></div>
+                  <div class="fw-bold">{{ ospite.scalaDDD }}</div>
+                </div>
+                <div class="col">
+                  <div><small class="text-muted label">Progetto (PAI):</small></div>
+                  <div class="fw-bold">{{ ospite.progetto }}</div>
+                </div>
+              </div>
+              <div class="container mt-5">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Data</th>
+                      <th scope="col">Nucleo</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngFor="let nucleo of ospite.nuclei">
+                    <tr>
+                      <td>{{ nucleo.dataTrasferimento | date: 'dd/MM/yyyy'}}</td>
+                      <td>{{ nucleo.nucleo }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="d-grid">
+
+                <div class="btn-group-vertical gap-2">
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#impostaAnagrafica">Imposta Anagrafica</button>
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#impostaSchedaSanitaria">Imposta Scheda Sanitaria</button>
+                  <button type="button" class="btn btn-primary" (click)="impostaPresente()">Imposta Presente</button>
+                  <button type="button" class="btn btn-primary" (click)="impostaAssente()">Imposta Assente</button>
+                  <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#trasferisciNucleo">Trasferisci di Nucleo</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<div class="modal fade" id="impostaAnagrafica" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="impostaAnagrafica">Imposta Anagrafica</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formAnagrafica">
+          <div class="mb-3">
+            <label for="nome" class="form-label">Nome:</label>
+            <input type="text" class="form-control" id="nome" formControlName="nome">
+          </div>
+          <div class="mb-3">
+            <label for="cognome" class="form-label">Cognome:</label>
+            <input type="text" class="form-control" id="cognome" formControlName="cognome">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancella</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+          (click)="impostaAnagrafica()">Salva</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="impostaSchedaSanitaria" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="impostaSchedaSanitaria">Imposta Scheda Sanitaria</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formSchedaSanitaria">
+          <div class="mb-3">
+            <label for="scalaDDD" class="form-label">Scala DDD:</label>
+            <input type="number" min="0" max="30" class="form-control" id="scalaDDD" formControlName="scalaDDD">
+            <div id="scalaDDD" class="form-text">0-10 Rischio Depressione | 11-20 Rischio Demenza | 21-30 Problemi
+              Deambulazione</div>
+          </div>
+          <div class="mb-3">
+            <label for="progetto" class="form-label">Progetto Assistenziale Individualizzato (PAI):</label>
+            <select class="form-select" id="progetto" formControlName="progetto">
+              <option *ngFor="let nomeProgetto of progetti" [value]="nomeProgetto">{{ nomeProgetto }}</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancella</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+          (click)="impostaSchedaSanitaria()">Salva</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="trasferisciNucleo" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="trasferisciNucleo">Trasferisci di Nucleo</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formTrasferimentoNucleo">
+          <div class="mb-3">
+            <label for="dataTrasferimento" class="form-label">Nome:</label>
+            <input type="datetime" class="form-control" id="nome" formControlName="dataTrasferimento">
+          </div>
+          <label for="nucleo" class="form-label">Nuovo nucleo:</label>
+          <select class="form-select" id="nucleo" formControlName="nuovoNucleo">
+            <option value="">Seleziona il nucleo</option>
+            <option *ngFor="let nomeNucleo of nuclei" [value]="nomeNucleo">{{ nomeNucleo }}</option>
+          </select>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancella</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+          (click)="trasferisciNucleo()">Salva</button>
+      </div>
+    </div>
+  </div>
+</div>
