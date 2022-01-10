@@ -6,5 +6,4 @@ export function Disabled (target: any, propertyKey: string, descriptor: Property
         disabled.push(propertyKey);
         Reflect.defineMetadata("state:disabled", disabled, target);
     }
-    console.log(`key: ${propertyKey}`, disabled, target, descriptor);
 }

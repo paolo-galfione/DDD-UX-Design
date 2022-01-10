@@ -65,7 +65,6 @@ constructor(id: number,
     }
 
     enabled(comando: string): boolean {
-        console.log(`metodi disabilitati`, Reflect.getMetadata("state:disabled", this._stato), this._stato);
         const disabled = Reflect.getMetadata("state:disabled", this._stato);
         return disabled ? !disabled.includes(comando) : true;
     }
