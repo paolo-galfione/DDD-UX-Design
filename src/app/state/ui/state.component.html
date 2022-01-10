@@ -63,11 +63,11 @@
                 <div class="btn-group-vertical gap-2">
                   <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                     data-bs-target="#impostaAnagrafica">Imposta Anagrafica</button>
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                  <button *ngIf="manager.enabled('impostaSchedaSanitaria')" type="button" class="btn btn-primary" data-bs-toggle="modal"
                     data-bs-target="#impostaSchedaSanitaria">Imposta Scheda Sanitaria</button>
-                  <button type="button" class="btn btn-primary" (click)="impostaPresente()">Imposta Presente</button>
-                  <button type="button" class="btn btn-primary" (click)="impostaAssente()">Imposta Assente</button>
-                  <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                  <button *ngIf="manager.enabled('impostaPresente')" type="button" class="btn btn-primary" (click)="impostaPresente()">Imposta Presente</button>
+                  <button *ngIf="manager.enabled('impostaAssente')" type="button" class="btn btn-primary" (click)="impostaAssente()">Imposta Assente</button>
+                  <button *ngIf="manager.enabled('trasferisciNucleo')" type="button" class="btn btn-primary" data-bs-toggle="modal"
                     data-bs-target="#trasferisciNucleo">Trasferisci di Nucleo</button>
                 </div>
               </div>

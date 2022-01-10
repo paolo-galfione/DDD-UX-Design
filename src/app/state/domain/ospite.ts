@@ -1,10 +1,9 @@
-import { State } from "../core/state";
 import { OspiteAssente } from "./ospite-assente";
 import { OspiteNucleo } from "./ospite-nucleo";
 import { OspitePresente } from "./ospite-presente";
 import { OspiteStato } from "./ospite-stato";
 
-export class Ospite extends State implements OspiteStato {
+export class Ospite implements OspiteStato {
     public id: number;
     public nome: string;
     public cognome: string;
@@ -23,7 +22,6 @@ constructor(id: number,
             nucleo: string,
             dataTrasferimento: Date
         ) {
-          super();
           this.id = id;
           this.nome = nome;
           this.cognome = cognome;
@@ -64,5 +62,11 @@ constructor(id: number,
 
     trasferisciNucleo(dataTrasferimento: Date, nucleo: string) {
         this._stato.trasferisciNucleo( dataTrasferimento, nucleo );
+    }
+
+    enabled(comando: string): boolean {
+        console.log(`metodi disabilitati`, Reflect.getMetadata("state:disabled", this._stato), this._stato);
+        const disabled = Reflect.getMetadata("state:disabled", this._stato);
+        return disabled ? !disabled.includes(comando) : true;
     }
 }

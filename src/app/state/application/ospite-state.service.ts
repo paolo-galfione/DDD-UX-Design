@@ -52,4 +52,8 @@ export class OspiteStateService {
     return this.ospite.nucleoCorrente;
   }
 
+  enabled(comando: string): boolean {
+    return this.ospite.enabled(comando);
+  }
+
 }

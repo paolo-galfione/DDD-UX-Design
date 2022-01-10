@@ -1,5 +1,6 @@
 import { errorIf } from "src/app/shared/helpers";
 import { Nuclei } from "src/app/shared/nuclei";
+import { Disabled } from "../core/disabled";
 import { Ospite } from "./ospite";
 import { OspiteAssente } from "./ospite-assente";
 import { OspiteStato } from "./ospite-stato";
@@ -16,6 +17,7 @@ export class OspitePresente implements OspiteStato  {
         this._ospite._progetto = progetto;
     }
 
+    @Disabled
     impostaPresente() {
         throw new Error(`L'ospite è già presente`);
     }
