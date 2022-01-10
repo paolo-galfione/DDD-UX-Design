@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { OspiteNucleo } from 'src/app/crud/entity/ospite-nucleo';
 import { Nuclei } from '../../shared/nuclei';
 import { Progetti } from '../../shared/progetti';
 import { Ospite } from '../domain/ospite';
@@ -14,9 +15,8 @@ export class OspiteDomainService {
 
   constructor() {
     this.ospite = new Ospite(1, 'Paolo', 'Galfione', true, 10,
-      Progetti[1], Nuclei[1], new Date(2021, 10, 1));
-    this.ospite.trasferisciNucleo(new Date(2021, 12, 31), Nuclei[2]);
-      console.log('creato ospite', this.ospite);
+      Progetti[1], Nuclei[1], new Date(2021, 0, 1));
+    this.ospite.trasferisciNucleo(new Date(2021, 11, 31), Nuclei[2]);
   }
 
   leggiOspite(): Ospite {
@@ -48,7 +48,7 @@ export class OspiteDomainService {
     this.ospite.trasferisciNucleo(new Date(dto.dataTrasferimento), dto.nucleo);
   }
 
-  nucleoCorrente(): string {
+  get nucleoCorrente(): OspiteNucleo {
     return this.ospite.nucleoCorrente;
   }
 

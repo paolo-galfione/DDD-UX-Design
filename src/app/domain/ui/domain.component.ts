@@ -18,6 +18,7 @@ export class DomainComponent implements OnInit {
   ospite!: Ospite;
   formAnagrafica!: FormGroup;
   formSchedaSanitaria!: FormGroup;
+  formTrasferimentoNucleo!: FormGroup;
   progetti = Progetti;
   nuclei = Nuclei;
 
@@ -37,7 +38,10 @@ export class DomainComponent implements OnInit {
       scalaDDD: this.ospite.scalaDDD,
       progetto: this.ospite.progetto,
     });
-    console.log(this.formSchedaSanitaria.value);
+    this.formTrasferimentoNucleo = this.fb.group({
+      nuovoNucleo: '',
+      dataTrasferimento: new Date().toISOString().substring(0,10)
+    });
   }
 
   impostaAnagrafica() {
@@ -56,10 +60,12 @@ export class DomainComponent implements OnInit {
     viewError(() => this.manager.impostaAssente());
   }
 
-  trasferisciNucleo(nucleo: string) {
+  trasferisciNucleo() {
     viewError(() => 
-      this.manager.trasferisciNucleo({ dataTrasferimento: new Date().toString(), nucleo })
-    );
+      this.manager.trasferisciNucleo({ 
+        dataTrasferimento: this.formTrasferimentoNucleo.value.dataTrasferimento, 
+        nucleo: this.formTrasferimentoNucleo.value.nuovoNucleo
+      }));
   }
 
 }

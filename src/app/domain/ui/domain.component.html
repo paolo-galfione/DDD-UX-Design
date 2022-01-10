@@ -3,10 +3,11 @@
   <div class="row justify-content-center">
     <div class="col-lg-8">
       <div class="card mt-5">
-        <div class="card-header" [ngClass]="{ 'bg-success': ospite.presente, 'text-white': ospite.presente, 'bg-warning': !ospite.presente }">
+        <div class="card-header"
+          [ngClass]="{ 'bg-success': ospite.presente, 'text-white': ospite.presente, 'bg-warning': !ospite.presente }">
           <div class="row">
             <div class="col">
-              Scheda di 
+              Scheda di
               <span class="fw-bold">{{ospite.nome}} {{ospite.cognome}}</span>
             </div>
             <div class="col text-end">
@@ -147,15 +148,22 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+        <form [formGroup]="formTrasferimentoNucleo">
+          <div class="mb-3">
+            <label for="dataTrasferimento" class="form-label">Nome:</label>
+            <input type="datetime" class="form-control" id="nome" formControlName="dataTrasferimento">
+          </div>
           <label for="nucleo" class="form-label">Nuovo nucleo:</label>
-          <select class="form-select" id="nucleo" #nomeNucleo>
-            <option *ngFor="let nomeNucleo of nuclei">{{ nomeNucleo }}</option>
+          <select class="form-select" id="nucleo" formControlName="nuovoNucleo">
+            <option value="">Seleziona il nucleo</option>
+            <option *ngFor="let nomeNucleo of nuclei" [value]="nomeNucleo">{{ nomeNucleo }}</option>
           </select>
+        </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancella</button>
         <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-          (click)="trasferisciNucleo(nomeNucleo.value)">Salva</button>
+          (click)="trasferisciNucleo()">Salva</button>
       </div>
     </div>
   </div>
