@@ -5,6 +5,7 @@ import { CRUDComponent } from './crud/ui/crud.component';
 import { DomainComponent } from './domain/ui/domain.component';
 import { StateComponent } from './state/ui/state.component';
 import { AuthComponent } from './auth/ui/auth.component';
+import { ExtrasComponent } from './extras/ui/extras.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},  
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path: 'domain', component: DomainComponent},
   {path: 'state', component: StateComponent},
   {path: 'auth', component: AuthComponent},
+  {path: 'extras', component: ExtrasComponent},
 ];
 
 @NgModule({

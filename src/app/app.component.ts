@@ -12,6 +12,6 @@ export class AppComponent {
     { title: 'Domain', routerLink: '/domain'},
     { title: 'State', routerLink: '/state'},
     { title: 'Auth', routerLink: '/auth'},
-    { title: 'Extra', routerLink: '/extras'}
+    { title: 'Extras', routerLink: '/extras'}
 ];
 }
