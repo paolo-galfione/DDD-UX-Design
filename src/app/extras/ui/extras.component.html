@@ -7,7 +7,7 @@
           <div class="h5">Imposta ruolo:</div>
         </div>
         <div class="col">
-          <select class="form-select" id="ruolo" [(ngModel)]="ruolo">
+          <select class="form-select" id="ruolo" [(ngModel)]="auth.ruolo">
             <option *ngFor="let ruolo of auth.leggiRuoli()" [value]="ruolo">{{ ruolo }}</option>
           </select> 
         </div>
@@ -72,14 +72,14 @@
 
                 <div class="btn-group-vertical gap-2">
                   <button command *ngIf="enabled('impostaAnagrafica')" type="button" class="btn btn-primary" data-bs-toggle="modal"
-                    data-bs-target="#impostaAnagrafica" (click)="test()">Imposta Anagrafica</button>
-                  <button *ngIf="enabled('impostaSchedaSanitaria')" type="button" class="btn btn-primary" data-bs-toggle="modal"
+                    data-bs-target="#impostaAnagrafica">Imposta Anagrafica</button>
+                  <button command *ngIf="enabled('impostaSchedaSanitaria')" type="button" class="btn btn-primary" data-bs-toggle="modal"
                     data-bs-target="#impostaSchedaSanitaria">Imposta Scheda Sanitaria</button>
-                    <button *ngIf="enabled('impostaProgettoDaPunteggio')" type="button" class="btn btn-primary" data-bs-toggle="modal"
+                    <button command *ngIf="enabled('impostaProgettoDaPunteggio')" type="button" class="btn btn-primary" data-bs-toggle="modal"
                     data-bs-target="#impostaProgettoDaPunteggio">Imposta Progetto da Punteggio</button>
-                   <button *ngIf="enabled('impostaPresente')" type="button" class="btn btn-primary" (click)="impostaPresente()">Imposta Presente</button>
-                  <button *ngIf="enabled('impostaAssente')" type="button" class="btn btn-primary" (click)="impostaAssente()">Imposta Assente</button>
-                  <button *ngIf="enabled('trasferisciNucleo')" type="button" class="btn btn-primary" data-bs-toggle="modal"
+                   <button command *ngIf="enabled('impostaPresente')" type="button" class="btn btn-primary" (click)="impostaPresente()">Imposta Presente</button>
+                  <button command *ngIf="enabled('impostaAssente')" type="button" class="btn btn-primary" (click)="impostaAssente()">Imposta Assente</button>
+                  <button command *ngIf="enabled('trasferisciNucleo')" type="button" class="btn btn-primary" data-bs-toggle="modal"
                     data-bs-target="#trasferisciNucleo">Trasferisci di Nucleo</button>
                 </div>
               </div>
@@ -87,9 +87,35 @@
           </div>
         </div>
       </div>
+
+      <div *ngIf="audit.auditLog.length" class="card mt-4">
+        <div class="card-header">
+          Elenco Comandi con motivazione utilizzo
+        </div>
+        <div class="card-body">
+          <div class="container">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Data</th>
+                  <th scope="col">Ruolo</th>
+                  <th scope="col">Motivazione</th>
+                </tr>
+              </thead>
+              <tbody *ngFor="let log of audit.auditLog">
+                <tr>
+                  <td>{{ log.dataLog| date: 'dd/MM/yyyy hh:mm'}}</td>
+                  <td>{{ log.ruolo }}</td>
+                  <td>{{ log.motivazione }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
-
+{{auth.ruolo}}
 </div>
 
 <div class="modal fade" id="impostaAnagrafica" tabindex="-1">

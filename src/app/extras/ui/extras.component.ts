@@ -7,6 +7,7 @@ import { Ospite } from '../domain/ospite';
 import { AuthService, Permessi } from '../core/auth.service';
 import { OspiteExtrasService } from '../application/ospite-extras.service';
 import { ProgettoDaPunteggio } from '../application/progetto-da-punteggio';
+import { AuditService } from '../core/audit.service';
 
 @Component({
   selector: 'app-crud',
@@ -14,7 +15,7 @@ import { ProgettoDaPunteggio } from '../application/progetto-da-punteggio';
   styles: [
     '.label { font-size: 0.75rem; text-transform: uppercase; }'
   ],
-  providers: [ OspiteExtrasService, AuthService, ProgettoDaPunteggio ]
+  providers: [ OspiteExtrasService, ProgettoDaPunteggio ]
 })
 export class ExtrasComponent implements OnInit {
   ospite!: Ospite;
@@ -23,18 +24,15 @@ export class ExtrasComponent implements OnInit {
   formTrasferimentoNucleo!: FormGroup;
   progetti = Progetti;
   nuclei = Nuclei;
-  ruolo: string;
   scalaDDD: number = 0;
 
   constructor(public manager: OspiteExtrasService,
               public auth: AuthService,
+              public audit: AuditService,
               public progettoService: ProgettoDaPunteggio,
               private fb: FormBuilder) {
-    this.ruolo = this.auth.leggiRuoli()[0] || '';
   }
-test(){
-  console.log('clickkeddd')
-}
+
   ngOnInit(): void {
     this.ospite = this.manager.leggiOspite();
     this.scalaDDD = this.ospite.scalaDDD;
@@ -84,7 +82,7 @@ test(){
   }
 
   enabled(comando: string): boolean {
-    const permesso = this.auth.leggiRuolo(this.ruolo)[comando];
+    const permesso = this.auth.leggiPermessoRuolo(comando);
     return this.manager.enabled(comando) && 
           (permesso === Permessi.Yes || permesso === Permessi.YesWithAudit);
   }

@@ -46,15 +46,18 @@ const permessi: any = {
   })
   export class AuthService {
 
+      public ruolo: string = this.leggiRuoli()[0];  
+
       leggiRuoli(): string[] {
-          let ruoli: string[] = [];
-          for (const ruolo in permessi) {
-            ruoli.push(ruolo);
-          }
-          return ruoli;
+          return Object.keys(permessi);
       }
 
-      leggiRuolo(ruolo: string): any {
-          return permessi[ruolo];
+      leggiPermessiRuolo(): any {
+          return permessi[this.ruolo];
       }
+
+      leggiPermessoRuolo(permesso: string): Permessi {
+        return permessi[this.ruolo][permesso];
+      }
+
   }

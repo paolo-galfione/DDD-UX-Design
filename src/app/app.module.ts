@@ -11,6 +11,7 @@ import { StateComponent } from './state/ui/state.component';
 import { AuthComponent } from './auth/ui/auth.component';
 import { ExtrasComponent } from './extras/ui/extras.component';
 import { CommandDirective } from './extras/core/command';
+import { AuthService } from './auth/core/auth.service';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import { CommandDirective } from './extras/core/command';
     ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [ AuthService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
